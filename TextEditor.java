@@ -3,6 +3,9 @@
 import javax.swing.*;
 
 public class TextEditor extends JFrame {
+    public static void main(final String[] args) {
+        new TextEditor();
+    }
     public TextEditor() {
 //        super("TextEditor");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -13,10 +16,10 @@ public class TextEditor extends JFrame {
         setLayout(null);
 
     }
-    public static void main(final String[] args) {
-        new TextEditor();
-    }
+    
     private void initComponents() {
+
+//__________TEXT AREA____________
 
         JTextArea TextArea = new JTextArea();
         TextArea.setName("TextArea");
@@ -28,7 +31,14 @@ public class TextEditor extends JFrame {
         // add(nameTextField);
         add(TextArea);
 
+//__________ScrollPane____________
+         JScrollPane ScrollPane = new JScrollPane(TextArea);  
+         TextArea.setName("ScrollPane");
+  
+        ScrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);  
+        ScrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);  
+        add(ScrollPane);
+        
+
     }
-
-
 }
