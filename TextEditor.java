@@ -69,7 +69,7 @@ public class TextEditor extends JFrame {
         LoadButton.setName("LoadButton");
         LoadButton.setBounds(330,9,75,30);
         LoadButton.addActionListener(actionEvent -> {
-            jTextArea.setText("");
+            jTextArea.setText(null);
             String Filename = FilenameField.getText();
             jTextArea.setText(inputFromFile(Filename));
 
@@ -97,11 +97,17 @@ public class TextEditor extends JFrame {
 
     public static String inputFromFile(String url) {
 
-        File file = new File(url);
-        try (Scanner scanner = new Scanner(file)) {
-            return scanner.nextLine();
-        } catch (FileNotFoundException e) {
-            return "Error! Try again, Reason :- File not found!";
+        String content = "";
+
+        try
+        {
+            content = new String ( Files.readAllBytes( Paths.get(url) ) );
         }
+        catch (IOException e)
+        {
+            e.printStackTrace();
+        }
+
+        return content;
     }
 }
