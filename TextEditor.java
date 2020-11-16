@@ -28,8 +28,9 @@ public class TextEditor extends JFrame {
         setSize(640, 480);
         setLocationRelativeTo(null);
         initComponents();
-        setVisible(true);
         setLayout(null);
+        setVisible(true);
+
 
     }
 
@@ -76,6 +77,59 @@ public class TextEditor extends JFrame {
 
         });
         add(LoadButton);
+
+//__________Menu Items____________
+
+        JMenuBar menuBar = new JMenuBar();
+
+        JMenu fileMenu = new JMenu("File");
+        fileMenu.setMnemonic(KeyEvent.VK_F);
+        fileMenu.setName("MenuFile");
+
+//        JMenu newMenuItem = new JMenu("New");
+//        JMenuItem textFileMenuItem = new JMenuItem("Text File");
+//        JMenuItem imgFileMenuItem = new JMenuItem("Image File");
+//        JMenuItem folderMenuItem = new JMenuItem("Folder");
+
+//        newMenuItem.add(textFileMenuItem);
+//        newMenuItem.add(imgFileMenuItem);
+//        newMenuItem.add(folderMenuItem);
+
+//        fileMenu.add(newMenuItem);
+        JMenuItem LoadMenuItem = new JMenuItem("Load");
+        LoadMenuItem.setName("MenuLoad");
+        LoadMenuItem.addActionListener(actionEvent -> {
+            jTextArea.setText(null);
+            String Filename = FilenameField.getText();
+            jTextArea.setText(inputFromFile(Filename));
+
+
+        });
+        JMenuItem SaveMenuItem = new JMenuItem("Save");
+        SaveMenuItem.setName("MenuSave");
+        SaveMenuItem.addActionListener(e -> {
+            String Filename = FilenameField.getText();
+            String Text = jTextArea.getText();
+            outputToFile(Text,Filename);
+        });
+//        JMenuItem closeAllMenuItem = new JMenuItem("Close All");
+        JMenuItem exitMenuItem = new JMenuItem("Exit");
+        exitMenuItem.setName("MenuExit");
+        exitMenuItem.addActionListener(event -> System.exit(0));
+//        fileMenu.add(newMenuItem);
+        fileMenu.add(SaveMenuItem);
+        fileMenu.add(LoadMenuItem);
+//        fileMenu.add(closeAllMenuItem);
+
+        fileMenu.addSeparator();
+        fileMenu.add(exitMenuItem);
+        menuBar.add(fileMenu);
+        setJMenuBar(menuBar);
+
+
+
+//___________Panel ___________
+
         JPanel greenPanel = new JPanel();
         greenPanel.setBounds(10,10,220,30);
         greenPanel.setLayout(new BorderLayout());
